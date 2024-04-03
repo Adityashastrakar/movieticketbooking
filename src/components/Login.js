@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { json, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -14,9 +16,23 @@ const Login = () => {
             body: JSON.stringify({ username, password }),
         });
         if (response.ok) {
-            console.log('Login successful');
+            const data = await response.text(); 
+            // const data = JSON.parse(responseData); 
+            switch (data) {
+                case 'user':
+                    alert('User Login Successful');
+                    navigate('/userdashboard');
+                    break;
+                case 'Towner':
+                    alert('Owner Login Successful');
+                    navigate('/ownerdashboard');
+                    break;
+                default:
+                    console.error('Invalid role:', data);
+                    break;
+            }
         } else {
-            console.error('Invalid username or password');
+           alert('Invalid username or password');
         }
     };
 

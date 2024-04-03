@@ -1,10 +1,12 @@
-import React, { useState ,  useHistory } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login';
+// import { useNavigate } from 'react-router-dom';
 
 
 function Home() {
 
+    // const navigate =useNavigate();
 //   const history = useHistory();
   const [formData, setFormData] = useState({
     name:'',
